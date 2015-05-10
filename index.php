@@ -1,4 +1,5 @@
 <?php
+
 class Project
 {
 public static function getInstance()
@@ -12,29 +13,34 @@ return $instance;
 }
 protected function __construct()
 {
-error_reporting(-1);
-ini_set('display_errors', 'On');
+//error_reporting(-1);
+//ini_set('display_errors', 'On');
 //Connect code
 $db = new PDO('mysql:host=localhost;dbname=finalproject;charset=utf8', 'root', 'protodrake124', array(PDO::ATTR_EMULATE_PREPARES => false,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+echo '<head>';
+echo '<link rel="stylesheet" type="text/css" href="css.css">';
+echo '</head>';
+
 //Pages
-echo '<a href="index.php?page=R1">Colleges with the highest percentage of women students</a><br>';
-echo '<a href="index.php?page=R2">Colleges with the highest percentage of male students</a><br>';
-echo '<a href="index.php?page=R3">Colleges with the largest endowment overall</a><br>';
-echo '<a href="index.php?page=R4">Colleges with the largest enrollment of freshman</a><br>';
-echo '<a href="index.php?page=R5">Colleges with the highest revenue from tuition</a><br>';
-echo '<a href="index.php?page=R6">Colleges with the lowest non zero tuition revenue</a><br>';
-echo '<br>The top 10 colleges by region<br>';
-echo '<a href="index.php?page=S0">US Service schools</a><br>';
-echo '<a href="index.php?page=S1">New England CT ME MA NH RI VT</a><br>';
-echo '<a href="index.php?page=S2">Mid East DE DC MD NJ NY PA</a><br>';
-echo '<a href="index.php?page=S3">Great Lakes IL IN MI OH WI</a><br>';
-echo '<a href="index.php?page=S4">Plains IA KS MN MO NE ND SD</a><br>';
-echo '<a href="index.php?page=S5">Southeast AL AR FL GA KY LA MS NC SC TN VA WV</a><br>';
-echo '<a href="index.php?page=S6">Southwest AZ NM OK TX</a><br>';
-echo '<a href="index.php?page=S7">Rocky Mountains CO ID MT UT WY</a><br>';
-echo '<a href="index.php?page=S8">Far West AK CA HI NV OR WA</a><br>';
-echo '<a href="index.php?page=S9">Outlying areas AS FM GU MH MP PR PW VI</a><br>';
+echo '<a href="index.php?page=R1">Colleges with the highest percentage of women students</a>     ';
+echo '<a href="index.php?page=R2">Colleges with the highest percentage of male students</a>     ';
+echo '<a href="index.php?page=R3">Colleges with the largest endowment overall</a>';
+echo '<br><br><a href="index.php?page=R4">Colleges with the largest enrollment of freshman</a>     ';
+echo '<a href="index.php?page=R5">Colleges with the highest revenue from tuition</a>     ';
+echo '<a href="index.php?page=R6">Colleges with the lowest non zero tuition revenue</a>';
+echo '<br><p>The top 10 colleges by region</p>';
+echo '<a href="index.php?page=S0">US Service schools</a>     ';
+echo '<a href="index.php?page=S1">New England CT ME MA NH RI VT</a>     ';
+echo '<a href="index.php?page=S2">Mid East DE DC MD NJ NY PA</a>     ';
+echo '<a href="index.php?page=S3">Great Lakes IL IN MI OH WI</a>     ';
+echo '<br><br><a href="index.php?page=S4">Plains IA KS MN MO NE ND SD</a>     ';
+echo '<a href="index.php?page=S5">Southeast AL AR FL GA KY LA MS NC SC TN VA WV</a>     ';
+echo '<a href="index.php?page=S6">Southwest AZ NM OK TX</a>      ';
+echo '<br><br><a href="index.php?page=S7">Rocky Mountains CO ID MT UT WY</a>     ';
+echo '<a href="index.php?page=S8">Far West AK CA HI NV OR WA</a>     ';
+echo '<a href="index.php?page=S9">Outlying areas AS FM GU MH MP PR PW VI</a>     ';
 
 echo '<br><br>';
 //Page 1
@@ -90,7 +96,7 @@ foreach($sqlarray as $title => $sql)
 {
 echo $title;
 	$num=1;
-	echo "<table border='1' style='width:100%' table-layout: fixed>";
+	echo "<table class='imagetable'  border='1' style='width:100%' table-layout: fixed>";
 	foreach($db->query($sql) as $row)
 	{	
 		//remove duplicates     
@@ -133,7 +139,7 @@ echo $title;
 if (strpos($_GET['page'],"R")===0)
 {
 	$num=1;
-	echo "<table border='1' style='width:100%' table-layout: fixed>";
+	echo "<table class='imagetable' border='1' style='width:100%' table-layout: fixed>";
 	foreach($db->query($sql) as $row)
 	{
 	
