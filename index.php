@@ -24,7 +24,18 @@ echo '<a href="index.php?page=R3">Colleges with the largest endowment overall</a
 echo '<a href="index.php?page=R4">Colleges with the largest enrollment of freshman</a><br>';
 echo '<a href="index.php?page=R5">Colleges with the highest revenue from tuition</a><br>';
 echo '<a href="index.php?page=R6">Colleges with the lowest non zero tuition revenue</a><br>';
-echo '<a href="index.php?page=R7">The top 10 colleges by region</a><br>';
+echo '<br>The top 10 colleges by region<br>';
+echo '<a href="index.php?page=S0">US Service schools</a><br>';
+echo '<a href="index.php?page=S1">New England CT ME MA NH RI VT</a><br>';
+echo '<a href="index.php?page=S2">Mid East DE DC MD NJ NY PA</a><br>';
+echo '<a href="index.php?page=S3">Great Lakes IL IN MI OH WI</a><br>';
+echo '<a href="index.php?page=S4">Plains IA KS MN MO NE ND SD</a><br>';
+echo '<a href="index.php?page=S5">Southeast AL AR FL GA KY LA MS NC SC TN VA WV</a><br>';
+echo '<a href="index.php?page=S6">Southwest AZ NM OK TX</a><br>';
+echo '<a href="index.php?page=S7">Rocky Mountains CO ID MT UT WY</a><br>';
+echo '<a href="index.php?page=S8">Far West AK CA HI NV OR WA</a><br>';
+echo '<a href="index.php?page=S9">Outlying areas AS FM GU MH MP PR PW VI</a><br>';
+
 echo '<br><br>';
 //Page 1
 if($_GET['page']=="R1")
@@ -58,10 +69,12 @@ if($_GET['page']=="R6")
         $sql = 'select institution, tuition from (select UNITID, institution from hd2013) as lable1 left join (select UNITID, tuition from f1213_f1a) as lable2 on lable1.UNITID = lable2.UNITID WHERE NOT tuition IS NULL and not tuition = 0 group by lable1.institution order by tuition asc;';
 }
 //Page 7
-if($_GET['page']=="R7")
+if (strpos($_GET['page'],"S")===0)
 {       
-	 $sql = '';
+$s = $_GET['page'];
+echo ($s);
 }
+
 // Sorts the array and prints it
 // This statment detects if the button clicked is a request R
 if (strpos($_GET['page'],"R")===0)
