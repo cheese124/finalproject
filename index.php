@@ -72,7 +72,59 @@ if($_GET['page']=="R6")
 if (strpos($_GET['page'],"S")===0)
 {       
 $s = $_GET['page'];
-echo ($s);
+$str = str_replace("S", "", "$s");
+
+$sql1 = 'select institution, endowment from (select UNITID, institution from hd2013 where region = '.$str.') as lable1 left join (select UNITID, endowment from f1213_f1a) as lable2 on lable1.UNITID = lable2.UNITID WHERE NOT endowment IS NULL and not endowment = 0 group by lable1.institution order by endowment desc limit 10;';
+
+$sql2 = 'select institution, current_assets from (select UNITID, institution from hd2013 where region = '.$str.') as lable1 left join (select UNITID, current_assets from f1213_f1a) as lable2 on lable1.UNITID = lable2.UNITID WHERE NOT current_assets IS NULL and not current_assets = 0 group by lable1.institution order by current_assets desc limit 10;';
+
+$sql3 = 'select institution, current_liabilities from (select UNITID, institution from hd2013 where region = '.$str.') as lable1 left join (select UNITID, current_liabilities from f1213_f1a) as lable2 on lable1.UNITID = lable2.UNITID WHERE NOT current_liabilities IS NULL and not current_liabilities = 0 group by lable1.institution order by current_liabilities desc limit 10;';
+
+$sql4 = 'select institution, tuition from (select UNITID, institution from hd2013 where region = '.$str.') as lable1 left join (select UNITID, tuition from f1213_f1a) as lable2 on lable1.UNITID = lable2.UNITID WHERE NOT tuition IS NULL and not tuition = 0 group by lable1.institution order by tuition asc limit 10;';
+
+$sql5 = 'select institution, tuition from (select UNITID, institution from hd2013 where region = '.$str.') as lable1 left join (select UNITID, tuition from f1213_f1a) as lable2 on lable1.UNITID = lable2.UNITID WHERE NOT tuition IS NULL and not tuition = 0 group by lable1.institution order by tuition desc limit 10;';
+
+$sqlarray = array ($sql1,$sql2,$sql3,$sql4,$sql5);
+foreach($sqlarray as $sql)
+{
+
+
+	$num=1;
+	echo "<table border='1' style='width:100%' table-layout: fixed>";
+	foreach($db->query($sql) as $row)
+	{	
+		//remove duplicates     
+		$remove=0;
+        	foreach($row as $x)
+        	{
+        		unset($row[$remove]);
+                	$remove++;
+        	}
+        	//Printer each entrey number in the table
+        	echo "<tr>";
+        	echo "<td>";
+        	echo ("Result Number");
+        	echo "</td>";
+        	echo "<td>";
+        	echo ($num);
+        	echo "</td>";
+        	echo "</tr>";
+        	foreach ($row as $key => $value)
+        	{
+        		echo "<tr>";
+                	echo "<td>";
+                	echo ($key);
+                	echo "</td>";
+                	echo "<td>";
+                	echo ($value);
+                	echo "</td>";
+                	echo "</tr>";
+        	}
+        	$num++;
+        	echo("<tr><td><br></td><td><br></td></tr>");
+	}
+	echo "</table>";
+}	
 }
 
 // Sorts the array and prints it
