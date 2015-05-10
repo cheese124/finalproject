@@ -84,11 +84,11 @@ $sql4 = 'select institution, tuition from (select UNITID, institution from hd201
 
 $sql5 = 'select institution, tuition from (select UNITID, institution from hd2013 where region = '.$str.') as lable1 left join (select UNITID, tuition from f1213_f1a) as lable2 on lable1.UNITID = lable2.UNITID WHERE NOT tuition IS NULL and not tuition = 0 group by lable1.institution order by tuition desc limit 10;';
 
-$sqlarray = array ($sql1,$sql2,$sql3,$sql4,$sql5);
-foreach($sqlarray as $sql)
+$sqlarray = array ('Endowment'=>$sql1,'Total Current Assets'=>$sql2,'Total current liabilities'=>$sql3,'Lowest non-zero tuition'=>$sql4,'Highest Tuition'=>$sql5);
+
+foreach($sqlarray as $title => $sql)
 {
-
-
+echo $title;
 	$num=1;
 	echo "<table border='1' style='width:100%' table-layout: fixed>";
 	foreach($db->query($sql) as $row)
@@ -103,10 +103,10 @@ foreach($sqlarray as $sql)
         	//Printer each entrey number in the table
         	echo "<tr>";
         	echo "<td>";
-        	echo ("Result Number");
+        	echo ($title);
         	echo "</td>";
         	echo "<td>";
-        	echo ($num);
+        	echo ("Result Number ".$num);
         	echo "</td>";
         	echo "</tr>";
         	foreach ($row as $key => $value)
@@ -124,6 +124,7 @@ foreach($sqlarray as $sql)
         	echo("<tr><td><br></td><td><br></td></tr>");
 	}
 	echo "</table>";
+	echo '<br><br>';
 }	
 }
 
