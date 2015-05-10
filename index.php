@@ -1,22 +1,21 @@
 <?php
-//error_reporting(-1);
-//ini_set('display_errors', 'On');
+
+error_reporting(-1);
+ini_set('display_errors', 'On');
+
 //Connect code
-$db = new PDO('mysql:host=localhost;dbname=employees;charset=utf8', 'root', 'protodrake124', array(PDO::ATTR_EMULATE_PREPARES => false,
+$db = new PDO('mysql:host=localhost;dbname=finalproject;charset=utf8', 'root', 'protodrake124', array(PDO::ATTR_EMULATE_PREPARES => false,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 //Pages
-echo '<a href="index.php?page=R1">Who is the highest paid employee?</a><br>';
-echo '<a href="index.php?page=R2">Who is the highest paid employee between 1985 and 1981?</a><br>';
-echo '<a href="index.php?page=R3">Which department currently has highest paid department manager?</a><br>';
-echo '<a href="index.php?page=R4">What are the titles of all the departments?</a><br>';
-echo '<a href="index.php?page=R5">Who are the current department heads?</a><br>';
-echo '<a href="index.php?page=R6">Who is highest paid employee that is not a department head?</a><br>';
-echo '<a href="index.php?page=R7">Who is currently the lowest paid employee?</a><br>';
-echo '<a href="index.php?page=R8">How many employees currently work in each department?</a><br>';
-echo '<a href="index.php?page=R9">How much does each department currently spend on salaries? </a><br>';
-echo '<a href="index.php?page=R10">How much is currently spent for all salaries?</a><br>';
-echo '<a href="index.php?page=insert">Insert a new Employee</a><br>';
-echo '<a href="index.php?page=update">Update an Employee</a><br>';
+echo '<a href="index.php?page=R1">Colleges with the highest percentage of women students</a><br>';
+echo '<a href="index.php?page=R2">Colleges with the highest percentage of male students</a><br>';
+echo '<a href="index.php?page=R3">Colleges with the largest endowment overall</a><br>';
+echo '<a href="index.php?page=R4">Colleges with the largest enrollment of freshman</a><br>';
+echo '<a href="index.php?page=R5">Colleges with the highest revenue from tuition</a><br>';
+echo '<a href="index.php?page=R6">Colleges with the lowest non zero tuition revenue</a><br>';
+
+echo '<a href="index.php?page=R7">The top 10 colleges by region</a><br>';
+
 echo '<br><br>';
 //Page 1
 if($_GET['page']=="R1")
