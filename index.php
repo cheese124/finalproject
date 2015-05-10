@@ -1,5 +1,19 @@
 <?php
 
+class Project
+{
+public static function getInstance()
+{
+static $instance = null;
+if (null === $instance) 
+{
+$instance = new static();
+}
+return $instance;
+}
+protected function __construct()
+{
+
 error_reporting(-1);
 ini_set('display_errors', 'On');
 
@@ -93,6 +107,10 @@ if (strpos($_GET['page'],"R")===0)
 		echo("<tr><td><br></td><td><br></td></tr>");
 	}
 	echo "</table>";
-}    
+}
+    
+}//constructor
+}//class
 
+$obj = Project::getInstance();   
 ?>
